@@ -17,5 +17,12 @@ steps:
 - script: |
     ls 
     echo  "build passed $(Build.BuildNumber) $(Build.BuildId)"
+    mkdir -p hello/click
+    echo "hello" > hello/click/hello.txt
     
   displayName: 'Run a multi-line script'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
+    artifact: 'drop'
